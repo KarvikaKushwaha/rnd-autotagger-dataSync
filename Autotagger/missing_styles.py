@@ -30,11 +30,7 @@ for i, row in df.iterrows():
     }
     result = client.search(index = similarity_index_name, body =  elasticquery)
     try:
-        hit=result.get('hits')
-        hits=hit.get('hits')
-        if len(hits)>0:
-            source=hits.get('_source')
-            family_id = source.get('familyid')
+        family_id = result.get('hits').get('hits')[0].get('_source').get('familyid')
     except Exception as e:
         raise Exception("familyid not found for given md5: ", row['md5'], e)
         
