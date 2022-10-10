@@ -25,15 +25,15 @@ for hit in res['hits']['hits']:
         destination_parent_source = destination_object.get("_source")
         source = hit.get('_source')
         if (source['isdefault']).lower()=='yes':
-            destination_parent_source['md5hash']=source.get('md5hash')
-            destination_parent_source['familyid']=source.get('familyid')
+            destination_parent_source['md5hash'] = source.get('md5hash')
+            destination_parent_source['familyid'] = source.get('familyid')
             destination_object['_id'] = hit['_id']
-            destination_parent_source['bestsellersrank']=source.get('bestsellersrank')
+            destination_parent_source['bestsellersrank'] = source.get('bestsellersrank')
             styles = source.get('styles')[0]
-            destination_parent_source['classification']=styles.get('classes')
+            destination_parent_source['classification'] = styles.get('classes')
             missing_data = gf.getDataFromApi([source.get('md5hash')])
             
-            missing_mltags_data= missing_data.get("mltags")
+            missing_mltags_data = missing_data.get("mltags")
             if missing_mltags_data:
                 missing_mltags = missing_mltags_data.get(source['md5hash']) 
                 if missing_mltags:
